@@ -1,0 +1,104 @@
+# ============================================================
+# SDB-PRO V1 Configuration
+# Satellite-Derived Bathymetry
+# ============================================================
+
+project:
+  name: SDB-PRO
+  version: v1.0
+
+
+# ------------------------------------------------------------
+# Data
+# ------------------------------------------------------------
+data:
+
+  # Processed Sentinel-2 GeoTIFF
+  sentinel2:
+    path: data/processed/sentinel2/Saipan_S2_8band_2022.tif
+    bands:
+      - 1
+      - 2
+      - 3
+      - 4
+
+  # Processed ICESat-2 CSV
+  icesat2:
+    path: data/processed/icesat2/Saipan_ICESat2.csv
+
+    # Required columns
+    longitude_column: lon_ph
+    latitude_column: lat_ph
+    depth_column: h_ph_refco
+
+    # Current dataset uses negative elevation/depth convention
+    depth_sign: negative
+
+  # Reference DEM used only for evaluation
+  dem:
+    path: data/processed/dem/Saipan_LiDAR.tif
+
+
+# ------------------------------------------------------------
+# Sample Construction
+# ------------------------------------------------------------
+sample:
+  patch_size: 5
+
+  # Remove samples whose patch is outside the image boundary
+  remove_boundary_samples: true
+
+  # Remove patches containing NaN values
+  remove_nan_samples: true
+
+  # Train / validation split
+  validation_ratio: 0.2
+  random_seed: 42
+
+
+# ------------------------------------------------------------
+# Model
+# ------------------------------------------------------------
+model:
+  name: cnn2d
+
+  # Number of input Sentinel-2 bands
+  in_channels: 4
+
+  # Spatial size of input patch
+  patch_size: 5
+
+
+# ------------------------------------------------------------
+# Training
+# ------------------------------------------------------------
+training:
+  batch_size: 128
+  epochs: 40
+  learning_rate: 0.001
+
+  # Automatically use CUDA if available
+  device: auto
+
+
+# ------------------------------------------------------------
+# Loss
+# ------------------------------------------------------------
+loss:
+  name: heteroscedastic
+
+
+# ------------------------------------------------------------
+# Output
+# ------------------------------------------------------------
+output:
+
+  checkpoint_dir: checkpoints
+
+  sample_dir: outputs/samples
+
+  prediction_dir: outputs/predictions
+
+  metrics_dir: outputs/metrics
+
+  figure_dir: outputs/figures
