@@ -15,16 +15,16 @@ data:
 
   # Processed Sentinel-2 GeoTIFF
   sentinel2:
-    path: data/processed/sentinel2/Saipan_S2_8band_2022.tif
+    path: data/guam_S2_8band.tif
     bands:
-      - 1
       - 2
       - 3
       - 4
+      - 8
 
   # Processed ICESat-2 CSV
   icesat2:
-    path: data/processed/icesat2/Saipan_ICESat2.csv
+    path: data/keypoints_10.csv
 
     # Required columns
     longitude_column: lon_ph
@@ -36,7 +36,7 @@ data:
 
   # Reference DEM used only for evaluation
   dem:
-    path: data/processed/dem/Saipan_LiDAR.tif
+    path: data/clip2.tif
 
 
 # ------------------------------------------------------------
