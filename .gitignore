@@ -2,14 +2,15 @@
 /data/
 
 # Model checkpoints
-checkpoints/
+/checkpoints/
 
 # Outputs
-outputs/
+/outputs/
 
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
 
 # Virtual environment
 .venv/
@@ -22,6 +23,14 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
+# PyInstaller
+/build/
+/dist/
+*.spec
+
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<prediction>
+    <input>
+        <raster>data/guam_S2_8band.tif</raster>
+        <checkpoint>checkpoints/best_model.pth</checkpoint>
+    </input>
+
+    <output>
+        <prediction>outputs/predictions/guam_sdb_prediction.tif</prediction>
+        <variance>outputs/predictions/guam_sdb_variance.tif</variance>
+    </output>
+
+    <model>
+        <bands>2,3,4,8</bands>
+        <patch_size>5</patch_size>
+        <batch_size>128</batch_size>
+    </model>
+</prediction>
